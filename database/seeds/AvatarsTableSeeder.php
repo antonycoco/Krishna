@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Models\Avatar;
 class AvatarsTableSeeder extends Seeder
 {
     /**
@@ -11,20 +11,30 @@ class AvatarsTableSeeder extends Seeder
      */
     public function run()
     {
-        Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_user/image'.rand(),
+        Avatar::create([
+            'imageUrl'=>'default.png',
+            'user_id'=>1,
         ]);
-        Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_user/image'.rand(),
+        Avatar::create([
+            'imageUrl'=>'default.png',
+            'user_id'=>2,
         ]);
-        Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_user/image'.rand(),
+        Avatar::create([
+            'imageUrl'=>'default.png',
+            'user_id'=>3,
         ]);
-        Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_user/image'.rand(),
+        Avatar::create([
+            'imageUrl'=>'default.png',
+            'user_id'=>4,
         ]);
-        Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_user/image'.rand(),
+        Avatar::create([
+            'imageUrl'=>'default.png',
+            'user_id'=>5,
         ]);
+        Avatar::create([
+            'imageUrl'=>'default.png',
+            'user_id'=>6,
+        ]);
+
     }
 }

@@ -15,9 +15,9 @@ class CreateAvatarsTable extends Migration
     {
         Schema::create('avatars', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('transitional_id')->unsigned();
+            $table->integer('transitional_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
-            $table->string('imageUrl');
+            $table->string('imageUrl')->default('default.png');
             $table->foreign('transitional_id')->references('id')->on('transitionals')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

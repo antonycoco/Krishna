@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Krishna') }}</title>
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/traitement_cropper.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/traitement_cropper.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
     @yield('css')
 </head>
 <body>
@@ -40,12 +46,17 @@
                 <li class="nav-item{{ currentRoute(route('register')) }}">
                     <a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>
             @else
-            <li class="nav-item">
-                <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">
-                    {{ csrf_field() }}
-                </form>
-            </li>
+                <li class="nav-item{{ currentRoute(route('profile.show')) }}">
+                    <a class="nav-link" href="{{ route('profile.show') }}">
+                        <img src="./images/avatars_users/{{ Auth::user()->imageUrl }}" style="width: 30px ">
+                        @lang('Bonjour, '){{ Auth::user()->username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hide">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
             @endguest
         </ul>
     </div>

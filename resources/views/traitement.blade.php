@@ -1,4 +1,4 @@
-@extends('resources.views.layouts.app')
+@extends('layouts.app')
 @section('content')
 <!--[if lt IE 9]>
 <div class="alert alert-warning alert-dismissible fade show m-0 rounded-0" role="alert">

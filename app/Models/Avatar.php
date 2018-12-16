@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Avatar extends Model
 {
+    protected $fillable = [
+        'imageUrl',
+    ];
+
     public function transitional()
     {
         return $this->belongsTo(Transitional::class);
