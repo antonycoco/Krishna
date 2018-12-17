@@ -20,6 +20,12 @@ Route::middleware('admin')->group(function () {
     Route::resource ('transitional', 'TransitionalController');
 
 });
+Route::middleware ('auth', 'verified')->group (function () {
+    Route::resource ('avatar', 'AvatarController', [
+        'only' => ['index','show','update','store']
+    ]);
+});
+
 Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
 Route::post('profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
 

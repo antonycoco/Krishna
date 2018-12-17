@@ -14,23 +14,23 @@ class TransitionalTableSeeder extends Seeder
     public function run()
     {
         Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_submit/image2',
+            'imageUrlTemp'=>'image2.png',
             'user_id'=>2,
         ]);
         Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_submit/image3',
+            'imageUrlTemp'=>'image3.png',
             'user_id'=>3,
         ]);
         Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_submit/image4',
+            'imageUrlTemp'=>'image4.png',
             'user_id'=>1,
         ]);
         Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_submit/image5',
+            'imageUrlTemp'=>'image5.png',
             'user_id'=>5,
         ]);
         Transitional::create([
-            'imageUrlTemp'=>'./images/avatars_submit/image1',
+            'imageUrlTemp'=>'image1.png',
             'user_id'=>4,
         ]);
 

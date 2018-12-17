@@ -3,11 +3,11 @@
 namespace App\Repositories\Eloquent;
 
 use App\TransitionalRepository;
-use App\Repositories\Contracts\TransitionalRepositoryRepository;
+use App\Repositories\Contracts\TransitionalRepository;
 
 use Kurt\Repoist\Repositories\Eloquent\AbstractRepository;
 
-class EloquentTransitionalRepositoryRepository extends AbstractRepository implements TransitionalRepositoryRepository
+class EloquentTransitionalRepository extends AbstractRepository implements TransitionalRepository
 {
     public function entity()
     {

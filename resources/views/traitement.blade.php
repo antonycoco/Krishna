@@ -14,7 +14,7 @@
         <div class="col-md-9">
         <!-- <h3>Demo:</h3> -->
             <div class="img-container">
-                <img src="./uploads/avatars/{{ Auth::user()->avatar }}" alt="Picture">
+                <img src="./images/avatars_users/{{Auth::user()->avatar->imageUrl}}" alt="Picture">
             </div>
         </div>
         <div class="col-md-3">
@@ -242,10 +242,11 @@
                         </div>
                         <div class="modal-body"></div>
                         <div class="modal-footer">
-                            <a class="btn btn-warning btn-default" data-dismiss="modal" data-toggle="tooltip" title="@lang('Fermer')">Close</a>
+                            <a class="btn btn-warning btn-default" data-dismiss="modal" data-toggle="tooltip"
+                               title="@lang('Fermer')">Close</a>
                             <a class="btn btn-primary" id="download" style="display:none"></a>
                             <a class="pull-left btn btn-success btn-primary" data-toggle="tooltip"
-                               href="{{ route('home') }}"  title="@lang('Sousmettre')">Submit</a>
+                               href="{{ route('avatar.store') }}"  title="@lang('Sousmettre')">Submit</a>
                         </div>
                     </div>
                 </div>

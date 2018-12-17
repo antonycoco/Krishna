@@ -46,9 +46,10 @@
                 <li class="nav-item{{ currentRoute(route('register')) }}">
                     <a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>
             @else
+            @auth
                 <li class="nav-item{{ currentRoute(route('profile.show')) }}">
                     <a class="nav-link" href="{{ route('profile.show') }}">
-                        <img src="./images/avatars_users/{{ Auth::user()->imageUrl }}" style="width: 30px ">
+                        <img src="./images/avatars_users/{{Auth::user()->avatar->imageUrl}}" style="width: 2vw ">
                         @lang('Bonjour, '){{ Auth::user()->username }}</a>
                 </li>
                 <li class="nav-item">
@@ -57,12 +58,18 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
+            @endauth
             @endguest
         </ul>
     </div>
 </nav>
 @yield('content')
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('js/traitement_cropper.js')}}" defer></script>
+<script src="{{asset('js/traitement_main.js')}}" defer></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://fengyuanchen.github.io/js/common.js"></script>
 @yield('script')
 <script>
     $(() => {
