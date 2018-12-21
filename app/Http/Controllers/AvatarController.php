@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class AvatarController extends Controller
 {
-    protected $repository;
-    public function __construct(TransitionalRepository $repository)
-    {
-        $this->repository = $repository;
-    }
 
     /**
      * Display a listing of the resource.
@@ -43,13 +38,7 @@ class AvatarController extends Controller
      */
     public function store(Request $request)
     {
-        $request->submit([
-            'imageUrlTemp'=>'required|image',
-            'user_id'=>'required|users,id'
-        ]);
-        $this->repository->store($request);
-        return back()->with('Ok',__("L'avatar va être sousmise à validation"));
-        //return view('profile')->with('Ok',__("L'avatar va être sousmise à validation"));
+
     }
 
     /**

@@ -13,7 +13,7 @@
             <tbody>
             @foreach($transitions as $transitional)
                 <tr>
-                    <td><img src="./images/avatars_submit/{{ $transitional->imageUrlTemp }}" style="..."></td>
+                    <td><img src="./images/avatars_submit/{{ $transitional->imageUrlTemp }}" style="width: 4vw"></td>
                     <td>
                         <a type="button" href="{{ route('transitional.update', $transitional->id) }}"
                            class="btn btn-success btn-sm pull-right invisible" data-toggle="tooltip"
