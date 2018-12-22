@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Avatar;
 use App\Repositories\TransitionalRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AvatarController extends Controller
 {
@@ -16,8 +17,8 @@ class AvatarController extends Controller
      */
     public function index()
     {
-/*       //pour test
-       return view('profile')->with('Ok',__("L'avatar va être sousmise à validation"));*/
+        $avatar = DB::table('avatars')->paginate(10);
+        return view('validations.index',['avatars'=>$avatar]);
     }
 
     /**

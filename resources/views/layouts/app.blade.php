@@ -26,13 +26,13 @@
         <ul class="navbar-nav mr-auto">
             @admin
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle{{ currentRoute(route('transitional.index'))}}" href="#"
+                <a class="nav-link dropdown-toggle{{ currentRoute(route('avatar.index'))}}" href="#"
                    id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     @lang('Administration')
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat">
-                    <a class="dropdown-item" href="{{ route('transitional.index') }}">
+                    <a class="dropdown-item" href="{{ route('avatar.index') }}">
                         <i class="fas fa-id-card-alt fa-lg"></i> @lang('Valider les Avatars')
                     </a>
                 </div>
@@ -47,9 +47,12 @@
                     <a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>
             @else
             @auth
-                <li class="nav-item{{ currentRoute(route('profile.show')) }}">
-                    <a class="nav-link" href="{{ route('profile.show') }}">
-                        <img src="./images/avatars_users/{{Auth::user()->avatar->imageUrl}}" style="width: 2vw ">
+                <li class="nav-item{{ currentRoute(route('profile.edit')) }}">
+                    <a class="nav-link" href="{{ route('profile.edit') }}">
+                        @if ($avatars == false )
+                            <img src="./images/avatars_users/default.jpg">
+                        @else <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="width: 3vw">
+                        @endif
                         @lang('Bonjour, '){{ Auth::user()->username }}</a>
                 </li>
                 <li class="nav-item">

@@ -17,16 +17,17 @@ Route::get('/', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::middleware('admin')->group(function () {
 
-    Route::resource ('transitional', 'TransitionalController');
+    Route::resource ('avatar','AvatarController');
 
 });
-Route::middleware ('auth', 'verified')->group (function () {
+/*Route::middleware ('auth', 'verified')->group (function () {
     Route::resource ('avatar', 'AvatarController', [
         'only' => ['index','show','update','store']
     ]);
-});
+});*/
 
 Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
+Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.edit');
 Route::post('profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
 
 Route::get('traitement', 'CropperController@edit')->middleware('auth')->name('traitement.edit');

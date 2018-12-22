@@ -6,13 +6,20 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 
 
 class UserProfileController extends Controller
 {
+    public function edit($id)
+    {
+        $avatars = DB::table('avatars')->where('imageValider','=',$id);
+        return view('profile', array('user' => Auth::user(),'avatars'=>$avatars));
+    }
     public function show()
     {
-        return view('profile', ['user' => Auth::user()] );
+        $avatars = DB::table('avatars');
+        return view('profile', array('user' => Auth::user(),'avatars'=>$avatars));
     }
     /**
      * @param Request $request
