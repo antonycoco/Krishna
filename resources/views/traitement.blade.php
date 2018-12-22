@@ -14,7 +14,10 @@
         <div class="col-md-9">
         <!-- <h3>Demo:</h3> -->
             <div class="img-container">
-                <img src="./images/avatars_users/{{Auth::user()->avatar->imageUrl}}" alt="Picture">
+                @if (Auth::user()->avatar->imageValider == false )
+                    <img src="./images/avatars_users/default.jpg" style="...">
+                @else <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="...">
+                @endif
             </div>
         </div>
         <div class="col-md-3">

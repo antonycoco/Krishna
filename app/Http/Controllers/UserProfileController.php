@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class UserProfileController extends Controller
 {
-    public function edit($id)
+    public function index()
     {
-        $avatars = DB::table('avatars')->where('imageValider','=',$id);
-        return view('profile', array('user' => Auth::user(),'avatars'=>$avatars));
+        return $avatars = DB::table('avatars');
     }
     public function show()
     {

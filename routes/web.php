@@ -26,8 +26,9 @@ Route::middleware('admin')->group(function () {
     ]);
 });*/
 
+
+Route::get('profile', 'UserProfileController@index')->middleware('auth')->name('profile.index');
 Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
-Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.edit');
 Route::post('profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
 
 Route::get('traitement', 'CropperController@edit')->middleware('auth')->name('traitement.edit');
