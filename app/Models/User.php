@@ -38,6 +38,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function avatar()
     {
-        return $this->hasMany(Avatar::class);
+        return $this->hasOne(Avatar::class);
     }
 }
