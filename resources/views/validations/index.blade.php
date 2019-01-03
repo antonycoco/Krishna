@@ -16,7 +16,7 @@
                     @if($avatar->imageValider == false)
                     <td><img src="./images/avatars_submit/{{ $avatar->imageUrl}}" style="width: 4vw"></td>
                     <td>
-                        <a type="button" href="{{ route('avatar.update', $avatar->id) }}"
+                        <a type="button" href="{{ route('avatar.edit', $avatar->id) }}"
                            class="btn btn-success btn-sm pull-right invisible" data-toggle="tooltip"
                            title="@lang("Valider l'avatar")"><i class="fas fa-check-square fa-lg"></i></a>
                     </td>

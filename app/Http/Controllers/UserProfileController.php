@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avatar;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +15,11 @@ class UserProfileController extends Controller
 {
     public function index()
     {
-        return $avatars = DB::table('avatars');
+       return $avatars = DB::table('avatars');
     }
     public function show()
     {
-        $avatars = DB::table('avatars');
-        return view('profile', array('user' => Auth::user(),'avatars'=>$avatars));
+        return view('profile');
     }
     /**
      * @param Request $request
@@ -26,14 +27,14 @@ class UserProfileController extends Controller
      */
     public function update(Request $request){
         // Logic for user upload of avatars
-        if($request->hasFile('avatars')){
+       /* if($request->hasFile('avatars')){
             $avatar = $request->file('avatars');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300, 300)->save( public_path('/images/avatars_submit' . $filename ) );
             $user = Auth::user();
             $user->avatar = $filename;
             $user->save();
-        }
+        }*/
         return view('profile', ['user' => Auth::class] );
     }
     /**

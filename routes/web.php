@@ -31,5 +31,6 @@ Route::get('profile', 'UserProfileController@index')->middleware('auth')->name('
 Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
 Route::post('profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
 
-Route::get('traitement', 'CropperController@edit')->middleware('auth')->name('traitement.edit');
-Route::post('traitement', 'CropperController@validate')->middleware('auth')->name('traitement.validate');
+Route::get('cropper', 'CropperController@index')->middleware('auth')->name('cropper.index');
+Route::get('cropper', 'CropperController@edit')->middleware('auth')->name('cropper.edit');
+Route::post('cropper', 'CropperController@soumettre')->middleware('auth')->name('cropper.soumettre');
