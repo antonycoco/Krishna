@@ -27,7 +27,7 @@ class CropperController extends Controller
         return view('cropper');
     }
     public function soumettre(){
-
+        echo'Votre image a bien été publié';
         return view ('profile');
     }
 }

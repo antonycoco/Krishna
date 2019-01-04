@@ -49,11 +49,12 @@
             @auth
                 <li class="nav-item{{ currentRoute(route('profile.show')) }}">
                     <a class="nav-link" href="{{ route('profile.show') }}">
-                        @if(Auth::user()->avatar->imageValider == '1')
-                                <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="width: 2vw">
+                        @if(isset(Auth::user()->avatar->imageValider) == '1')
+                            <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="width: 2vw">
                         @else <img src="./images/avatars_users/default.jpg" style="width: 2vw">
                         @endif
-                        @lang('Bonjour, '){{ Auth::user()->username }}</a>
+                        @lang('Bonjour, '){{ Auth::user()->username }}
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>

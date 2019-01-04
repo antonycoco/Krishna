@@ -3,9 +3,9 @@
     <div class="container" style="align-content: center">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                @if(Auth::user()->avatar->imageValider == '1')
+                @if(isset(Auth::user()->avatar->imageValider) == '1')
                     <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="...">
-                @else <img src="./images/avatars_users/default.jpg" style="width: 2vw">
+                @else <img src="./images/avatars_users/default.jpg" style="...">
                 @endif
                 <h2>@lang('Bienvenue dans votre profil, '){{ Auth::user()->username }}</h2>
                 <a data-toggle="tooltip" href="{{ route('cropper.edit') }}" title=""
