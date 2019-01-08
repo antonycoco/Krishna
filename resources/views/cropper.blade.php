@@ -240,31 +240,19 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body"></div>
+                        <div class="modal-body" id="imageCropped"></div>
                         <div class="modal-footer">
-                            <a class="btn btn-warning btn-default" data-dismiss="modal" data-toggle="tooltip"
+                            <a class="btn btn-warning btn-default " data-dismiss="modal" data-toggle="tooltip"
                                title="@lang('Fermer')">close</a>
-                            {{--<a class="btn btn-primary soumettre" id="download" --}}{{-- style="display:none"--}}{{--
-                            data-toggle="tooltip"title="@lang('Soumettre')">Submit</a>--}}
-                             <form method="POST" action="{{ currentRoute('cropper.sousmettre') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ currentRoute('cropper.soumettre') }}" enctype="multipart/form-data">
                              {{ csrf_field() }}
-                                 <div class="field">
-                                     <label class="label">test</label>
-                                     <div class="control">
-                                         <a class="btn btn-primary soumettre" id="download" {{-- style="display:none"--}}
-                                         data-toggle="tooltip"title="@lang('Soumettre')">Submit</a>
-                                     </div>
-                                 </div>
-
-                                 <div class="field">
-                                     <div class="control">
-                                         <button class="btn btn-primary soumettre" type="submit" onclick="pop(this)">Publier</button>
-                                     </div>
-                                 </div>
-                                <input type="submit" class="btn btn-primary soumettre" href="#download" onclick="pop(this)">
+                                <a class="btn btn-primary" id="download" data-toggle="tooltip"
+                                   title="@lang('Sauvegarder')">Save</a>
+                                <input type="text" id="publierNom" name="publierNom" style="display:none" >
+                                <input type="text" id="publierHref" name="publierHref" style="display:none" >
+                                <button class="btn btn-primary trans" id="soumettre"
+                                        data-toggle="tooltip" title="@lang('Soumettre')">Submit</button>
                              </form>
-                            {{--<a class="pull-left btn btn-success btn-primary" data-toggle="tooltip"
-                               href="{{ route('cropper.sousmettre') }}"  title="@lang('Sousmettre')">Submit</a>--}}
                         </div>
                     </div>
                 </div>
@@ -453,14 +441,22 @@
 @endsection
 @section('script')
     <script>
-        function pop(e){
-            alert(e.getAttribute('download'));
+        var Donne = function (id) {
+            var me = this;
+            me.id = id;
+            me.el = document.getElementById(me.id);
+            me.recupName = function(){
+                document.getElementById('publierNom').value=$('#download').attr('download');
+            }
+            me.recupImage = function(){
+                document.getElementById('publierHref').value=$('#download').attr('href');
+            }
+            me.el.addEventListener('click',me.recupName);
+            me.el.addEventListener('click',me.recupImage);
         }
-        $(() => {
-            $('a').submit('soumettre')
-        })
+        var soumettre = new Donne('soumettre');
     </script>
-    @include('partials.script-submit')
+
 @endsection
 
 

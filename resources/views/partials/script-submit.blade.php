@@ -25,21 +25,20 @@ function connect(oElem, sEvType, fn, bCapture)
 
 function chargerFonction()
 {
-    if(document.getElementById('download'))
-        return document.getElementById('download').onclick = recupId;
-    return alert ("il n'y a pas d'element download")
+    if(document.getElementById('publier'))
+        return document.getElementById('publier').onclick = recupId;
+    return alert ("il n'y a pas d'element publier")
 
 }
-function recupHref() {
-    if(this.href)
-        return alert(this.href);
-    return alert('erreur')
-}
+
 
 function recupId()
 {
     if(this.id)
-        return alert(this.id);
+        var name = $('#download').attr('download')
+        var lien = $('#download').attr('href');
+        alert(name);
+        return (name);
     return alert ("il n'y a pas d'element href enregistrable");
 }
 
