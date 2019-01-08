@@ -49,7 +49,7 @@
             @auth
                 <li class="nav-item{{ currentRoute(route('profile.show')) }}">
                     <a class="nav-link" href="{{ route('profile.show') }}">
-                        @if(isset(Auth::user()->avatar->imageValider) == '1')
+                        @if(isset(Auth::user()->avatar->imageValider) and Auth::user()->avatar->imageValider == true)
                             <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="width: 2vw">
                         @else <img src="./images/avatars_users/default.jpg" style="width: 2vw">
                         @endif

@@ -15,7 +15,7 @@
         <div class="col-md-9">
             <!-- <h3>Demo:</h3> -->
             <div class="img-container">
-                @if(isset(Auth::user()->avatar->imageValider) == '1')
+                @if(isset(Auth::user()->avatar->imageValider) and Auth::user()->avatar->imageValider == true)
                     <img src="./images/avatars_submit/{{Auth::user()->avatar->imageUrl}}" style="...">
                 @else <img src="./images/avatars_users/default.jpg" style="...">
                 @endif
