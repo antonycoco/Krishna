@@ -21,6 +21,9 @@ class UserProfileController extends Controller
     {
         return view('profile');
     }
+    public function postForm(){
+
+    }
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
