@@ -19,7 +19,7 @@ class UserProfileController extends Controller
     }
     public function show()
     {
-        return view('profile');
+        return view('layouts.profile');
     }
     public function postForm(){
 

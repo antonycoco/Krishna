@@ -65,7 +65,7 @@ class CropperController extends Controller
         $avatarImage=imagecreatefromstring($avatarData);
         imagejpeg($avatarImage,$dossier.$avatarName);
 
-        return view ('profile');
+        return view ('layouts.profile');
     }
     public function dataURI_decode(){}
 }

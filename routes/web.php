@@ -36,3 +36,5 @@ Route::get('cropper', 'CropperController@edit')->middleware('auth')->name('cropp
 Route::post('cropper', 'CropperController@soumettre')->middleware('auth')->name('cropper.soumettre');
 
 Route::get('users/{id}/profile_photo', 'PhotosController@showProfilePhoto')->middleware('auth')->name('users.showProfilePhoto');
+
+Route::get('users/{id}/avatar_user','PhotosController@showAvatarUser')->middleware('auth')->name('users.showAvatarUser');

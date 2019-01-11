@@ -3,7 +3,6 @@
 @section('card')
 
     @component('components.card')
-
         @slot('title')
             @lang('Connexion')
         @endslot
