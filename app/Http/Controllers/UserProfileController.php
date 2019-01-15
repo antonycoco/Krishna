@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Avatars\AvatarUser;
 use App\Models\Avatar;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -17,9 +18,13 @@ class UserProfileController extends Controller
     {
        return $avatars = DB::table('avatars');
     }
-    public function show()
+    public function show($id)
     {
-        return view('layouts.profile');
+        if (Auth::id()==$id){
+            $avatarPath = AvatarUser::set_avatarUserName($id).'/'.AvatarUser::get_avatarUserName($id);
+            return view('profile.profile',compact('avatarPath'));
+        }
+        else abort("404");
     }
     public function postForm(){
 
@@ -38,7 +43,7 @@ class UserProfileController extends Controller
             $user->avatar = $filename;
             $user->save();
         }*/
-        return view('profile', ['user' => Auth::class] );
+        return view('profile.profile', ['user' => Auth::class] );
     }
     /**
      * @param $role

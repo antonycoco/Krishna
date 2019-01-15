@@ -28,15 +28,15 @@ class CropperController extends Controller
                 ['user_id','!=',$user],
             ])
             ->update(['imageUrl'=> $uploadedImageURL]);
-        return view ('profile',['avatars'=>$avatar]);
+        return view ('profile.profile',['avatars'=>$avatar]);
     }
     public function edit(Request $request){
-        return view('cropper');
+        return view('cropper.cropper');
     }
     public function soumettre()
     {
         //sauvegarde du nom de l'avatar en base en attentede validation
-        $dossier = './images/avatars_submit/';
+        $dossier = 'storage/imagesSubmit/';
         $user=Auth::User()->id;
         $avatars=Avatar::all();
         foreach($avatars as $avatar){
@@ -65,7 +65,7 @@ class CropperController extends Controller
         $avatarImage=imagecreatefromstring($avatarData);
         imagejpeg($avatarImage,$dossier.$avatarName);
 
-        return view ('layouts.profile');
+        //return view ('profile.profile',compact('avatarPath'));
     }
     public function dataURI_decode(){}
 }

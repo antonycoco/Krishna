@@ -1,14 +1,9 @@
 @extends('layouts.form')
-
 @section('card')
-
     @component('components.card')
-
         @slot('title')
             @lang('Valider les images des profils')
         @endslot
-
-
         <table class="table table-dark text-white">
             <tbody>
             @foreach($avatars as $avatar)
