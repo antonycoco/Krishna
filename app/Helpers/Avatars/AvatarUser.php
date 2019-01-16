@@ -32,11 +32,11 @@ class AvatarUser
             if ($avatarValide == true) {
                 if ($user and isset($avatarUser->imageUrl))// Column where user's photo name is stored in DB
                 {
-                    $path = asset('storage/imagesUser/');
+                    $path = asset('storage/imagesUsers/');
 
                 }
             } else {
-                $path = asset('storage/imagesDefault/');
+                $path = asset('storage/imagesDefaults/');
             }
         }return $path;
     }

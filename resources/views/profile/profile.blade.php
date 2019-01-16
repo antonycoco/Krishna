@@ -16,8 +16,8 @@
 {{--
                             @component('components.avatar-user')@endcomponent
 --}}
-                            <img src="{{ $avatarPath }}">
-                            <a data-toggle="tooltip" href="{{ route('cropper.edit') }}" title=""
+                            <img src="{{ $avatarPath }}" >
+                            <a data-toggle="tooltip" href="{{ route('cropper.edit',$avatarPath) }}" title=""
                                 class="pull-left btn btn-success btn-primary"
                                 data-original-title="An advanced example of Cropper.js">Edition de la photo du profil</a>
                         </div>

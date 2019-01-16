@@ -36,7 +36,7 @@ Route::get('cropper', 'CropperController@edit')->middleware('auth')->name('cropp
 Route::post('cropper', 'CropperController@soumettre')->middleware('auth')->name('cropper.soumettre');
 
 Route::get('test-rand-name', function (){
-    return RdsName::get_incrementalHash('cropped.jpg');
+    return RdsName::get_incrementalHash('storage/imagesDefauts/default.jpg');
 });
 Route::get('test-avatar-path',function(){
     return AvatarDp::get_avatarUserName(\phpDocumentor\Reflection\Types\This::class);// a tester 
