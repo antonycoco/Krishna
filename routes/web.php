@@ -28,8 +28,9 @@ Route::middleware('admin')->group(function () {
 
 
 Route::get('profile', 'UserProfileController@index')->middleware('auth')->name('profile.index');
-Route::get('profile/{id}', 'UserProfileController@show')->middleware('auth')->name('profile.show');
+Route::get('profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
 Route::post('profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
+
 
 Route::get('cropper', 'CropperController@index')->middleware('auth')->name('cropper.index');
 Route::get('cropper', 'CropperController@edit')->middleware('auth')->name('cropper.edit');
@@ -41,6 +42,8 @@ Route::get('test-rand-name', function (){
 Route::get('test-avatar-path',function(){
     return AvatarDp::get_avatarUserName(\phpDocumentor\Reflection\Types\This::class);// a tester 
 });
+
+Route::get('users/{id}/profile_photo','PhotosController@showProfilePhoto')->middleware('auth')->name('showProfilePhoto');
 
 /*Route::middleware('auth')->group(function () {
     Route::name('profile.')->prefix('profile')->group(function () {

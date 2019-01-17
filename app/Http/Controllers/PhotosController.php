@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Auth;
 class PhotosController extends Controller
 {
 
-    public function showProfilePhoto($id) {
-        if (Auth::id()==$id){
-            echo('<img src="'.$avatarPath = AvatarUser::set_avatarUserName($id).'/'.$this->showAvatarUser($id).'" />');
-            return view ('components.avatar-user',['avatarPath'=>$avatarPath]);
-        }
-        abort("404");
+    public function showProfilePhoto() {
+        //if (Auth::id()==$id){
+        $id=(Auth::id());
+        $avatarPathPhoto = AvatarUser::set_avatarUserName($id).'/'.$this->showAvatarUser($id);
+        return $avatarPathPhoto;
+       // }
+        //abort("404");
     }
     public function showAvatarUser($id){
         return AvatarUser::get_avatarUserName($id);

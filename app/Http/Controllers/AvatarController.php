@@ -17,8 +17,10 @@ class AvatarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $avatarPath = $request->session()->get('avatarPath');
+
         $admin=Auth::User()->id;
         $avatar = DB::table('avatars')
             ->where([
@@ -27,7 +29,7 @@ class AvatarController extends Controller
             ])
             ->orderBy('updated_at','asc')
             ->paginate(5);
-        return view('validations.index',['avatars'=>$avatar]);
+        return view('validations.index',['avatars'=>$avatar],compact('avatarPath'));
     }
 
     /**

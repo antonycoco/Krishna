@@ -18,13 +18,10 @@ class UserProfileController extends Controller
     {
        return $avatars = DB::table('avatars');
     }
-    public function show($id)
-    {
-        if (Auth::id()==$id){
-            $avatarPath = AvatarUser::set_avatarUserName($id).'/'.AvatarUser::get_avatarUserName($id);
+    public function show(Request $request)    {
+
+            $avatarPath = $request->session()->get('avatarPath');
             return view('profile.profile',compact('avatarPath'));
-        }
-        else abort("404");
     }
     public function postForm(){
 
