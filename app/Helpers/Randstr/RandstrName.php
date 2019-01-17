@@ -31,7 +31,7 @@ class RandstrName
         //$base = strlen($charset);
         //$md5name= md5($name);
         //$image="storage/app/public/imagesDefauts/default.jpg";
-        echo ('<img src="'.$data.'""');
+        echo ('affichage du href : '.$data);
         echo('<br/>');
 //        $file=fopen($data,"rb");
 //        $content=fread($file,filesize($data));
@@ -49,10 +49,19 @@ class RandstrName
         Storage::disk('imagesSubmits')->makeDirectory($nameAvatar);
         echo('<br/>');
         file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents($data));//code fonctionnel
-        $donne=Storage::disk('imagesSubmits')->get("$nameAvatar/Avatar.$nameAvatar");
-        $image=imagecreatefromstring($donne);
-        echo('affiche image : '.$image);
-        imagejpeg($image);
+        //$donne=Storage::disk('imagesSubmits')->get("$nameAvatar/Avatar.$nameAvatar");
+        //$image=imagecreatefromstring($donne);
+        //echo('affiche image : '.$image);
+        echo('<br/>');
+        $avatarHeader = 'image/'.substr(strrchr($data, '.'),1);
+        //sauvegarde de l'image cropped apres encodage(balise canvas)/decodage Base64
+        \header($avatarHeader);
+        $avatarBase64=$data;
+        //on retire le MINE-type et le mot clé present pour ne recuperer que la data de l'encodage
+        $avatarBase64= substr(strrchr($avatarBase64,','),1);
+        $avatarData=base64_decode($avatarBase64);
+        $avatarImage=imagecreatefromstring($avatarData);
+        imagejpeg($avatarImage);
         //echo substr($result,0,16);
         //return substr($result, 0,16);
     }
