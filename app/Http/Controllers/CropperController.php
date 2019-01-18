@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Avatars\AvatarUser;
 use App\Models\Avatar;
 use App\Models\User;
 use http\Header;
@@ -31,12 +32,15 @@ class CropperController extends Controller
         return view ('profile.profile',['avatars'=>$avatar]);
     }
     public function edit(Request $request){
-        return view('cropper.cropper');
+        $avatarPath = $request->session()->get('avatarPath');
+        return view('cropper.cropper',compact('avatarPath'));
     }
-    public function soumettre()
+    public function soumettre(Request $request)
     {
         //sauvegarde du nom de l'avatar en base en attentede validation
-        $dossier = 'storage/imagesSubmit/';
+        $avatarPath = $request->session()->get('avatarPath');
+
+        $dossier = 'storage/imagesSubmits/';
         $user=Auth::User()->id;
         $avatars=Avatar::all();
         foreach($avatars as $avatar){
@@ -65,7 +69,7 @@ class CropperController extends Controller
         $avatarImage=imagecreatefromstring($avatarData);
         imagejpeg($avatarImage,$dossier.$avatarName);
 
-        //return view ('profile.profile',compact('avatarPath'));
+        return view ('profile.profile',compact('avatarPath'));
     }
     public function dataURI_decode(){}
 }

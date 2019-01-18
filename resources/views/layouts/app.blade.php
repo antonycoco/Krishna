@@ -10,11 +10,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/traitement_cropper.css') }}" rel="stylesheet">
     <link href="{{ asset('css/traitement_cropper.css') }}" rel="stylesheet">
-{{--
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
---}}
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">--}}
+    {{--<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">--}}
     @yield('css')
 </head>
 <body>
@@ -51,7 +49,8 @@
             @auth
                 <li class="nav-item">
                     <a class="nav-justified" style="padding: 0.5rem 1rem">
-                        <img src="{{ \App\Helpers\Avatars\AvatarUser::set_avatarUserName(Auth::user()->id) }}/{{Auth::user()->avatar->imageUrl}}" style="width: 2vw">
+                        {{--@include('Avatar.avatar-user')--}}
+                        <img src="{{ $avatarPath }}" style="width: 3vw ">
                     </a>
                 </li>
                     <a class="nav-link">@lang('Bonjour, '){{ Auth::user()->username }}</a>
