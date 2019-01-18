@@ -44,23 +44,27 @@ class RandstrName
         //echo $content2;
         $date = date_timestamp_get(date_create());
         $nameAvatar=(Auth::user()->username).($date);
-        echo('<br/>');
+        echo('<br/>-----------------------------------------------------------------------------------------------------');
         echo $nameAvatar;
         Storage::disk('imagesSubmits')->makeDirectory($nameAvatar);
-        echo('<br/>');
-        file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents($data));//code fonctionnel
+        echo('<br/>-----------------------------------------------------------------------------------------------------');
+        file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data"));//code fonctionnel
         //$donne=Storage::disk('imagesSubmits')->get("$nameAvatar/Avatar.$nameAvatar");
         //$image=imagecreatefromstring($donne);
         //echo('affiche image : '.$image);
-        echo('<br/>');
+        echo('<br/> affiche extraction du header ------------------------------------------------------------------------');
         $avatarHeader = 'image/'.substr(strrchr($data, '.'),1);
         //sauvegarde de l'image cropped apres encodage(balise canvas)/decodage Base64
-        \header($avatarHeader);
+        echo(\header($avatarHeader));
+        echo('<br/>affiche le code base 64 -------------------------------------------------------------------------------');
         $avatarBase64=$data;
         //on retire le MINE-type et le mot clé present pour ne recuperer que la data de l'encodage
-        $avatarBase64= substr(strrchr($avatarBase64,','),1);
-        $avatarData=base64_decode($avatarBase64);
-        $avatarImage=imagecreatefromstring($avatarData);
+        echo ($avatarBase64= substr(strrchr($avatarBase64,','),1));
+        echo('<br/>affiche le decodage base64----------------------------------------------------------------------------');
+        echo($avatarData=base64_decode($avatarBase64));
+        echo('<br/>affiche la creation d image via une chaine -----------------------------------------------------------');
+        echo($avatarImage=imagecreatefromstring($avatarData));
+        echo('<br/>afichage de l image -----------------------------------------------------------------------------------');
         imagejpeg($avatarImage);
         //echo substr($result,0,16);
         //return substr($result, 0,16);
