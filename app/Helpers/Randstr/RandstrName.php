@@ -1,0 +1,72 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: anton
+ * Date: 14/01/2019
+ * Time: 19:52
+ */
+
+namespace App\Helpers\Randstr;
+
+
+use Faker\Provider\DateTime;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Whoops\Util\SystemFacade;
+
+class RandstrName
+{
+    /**
+     * @param $name
+     * @return bool|string
+     */
+    public static function get_incrementalHash($data){
+       /* $seed = str_split("0123456789.!@#$%^&*().ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz");
+        shuffle($seed); // probably optional since array_is randomized; this may be redundant
+        $rand = '';
+        foreach (array_rand($seed, 8) as $k){
+            echo (str_shuffle($rand .= $seed[$k]));
+        }*/
+        //$base = strlen($charset);
+        //$md5name= md5($name);
+        //$image="storage/app/public/imagesDefauts/default.jpg";
+        echo ('affichage du href : '.$data);
+        echo('<br/>');
+//        $file=fopen($data,"rb");
+//        $content=fread($file,filesize($data));
+//        fclose($file);
+//        echo $content;
+//        echo('<br/>');
+        $file2 =file_get_contents($data);
+        $content2=($file2);
+        error_reporting(null);
+        //echo $content2;
+        $date = date_timestamp_get(date_create());
+        $nameAvatar=(Auth::user()->username).($date);
+        echo('<br/>-----------------------------------------------------------------------------------------------------');
+        echo $nameAvatar;
+        Storage::disk('imagesSubmits')->makeDirectory($nameAvatar);
+        echo('<br/>-----------------------------------------------------------------------------------------------------');
+        file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data"));//code fonctionnel
+        //$donne=Storage::disk('imagesSubmits')->get("$nameAvatar/Avatar.$nameAvatar");
+        //$image=imagecreatefromstring($donne);
+        //echo('affiche image : '.$image);
+        echo('<br/> affiche extraction du header ------------------------------------------------------------------------');
+        $avatarHeader = 'image/'.substr(strrchr($data, '.'),1);
+        //sauvegarde de l'image cropped apres encodage(balise canvas)/decodage Base64
+        echo(\header($avatarHeader));
+        echo('<br/>affiche le code base 64 -------------------------------------------------------------------------------');
+        $avatarBase64=$data;
+        //on retire le MINE-type et le mot clé present pour ne recuperer que la data de l'encodage
+        echo ($avatarBase64= substr(strrchr($avatarBase64,','),1));
+        echo('<br/>affiche le decodage base64----------------------------------------------------------------------------');
+        echo($avatarData=base64_decode($avatarBase64));
+        echo('<br/>affiche la creation d image via une chaine -----------------------------------------------------------');
+        echo($avatarImage=imagecreatefromstring($avatarData));
+        echo('<br/>afichage de l image -----------------------------------------------------------------------------------');
+        imagejpeg($avatarImage);
+        //echo substr($result,0,16);
+        //return substr($result, 0,16);
+    }
+}

@@ -18,9 +18,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('admin', function () {
             return auth()->check() && auth()->user()->admin;
         });
-        if (request ()->server ("SCRIPT_NAME") !== 'artisan') {
+/*        if (request ()->server ("SCRIPT_NAME") !== 'artisan') {
             view ()->share ('transitions', resolve(TransitionalRepository::class)->getAll());
-        }
+        }*/
     }
 
     /**

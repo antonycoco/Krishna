@@ -6095,6 +6095,26 @@ input[type="button"].btn-block {
   background-color: #1b1e21;
   border-color: #1b1e21;
 }
+.logo-wrap {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 0 50px;
+    -ms-flex: 0 50px;
+    flex: 0 50px;
+}
+/*.logo {
+    text-indent: 101%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: url("/default.jpg");
+    width: 50px;
+    height: 50px;
+    -webkit-background-size: 50px 50px;
+    -moz-background-size: 50px 50px;
+    background-size: 50px 50px;
+    display: block;
+}*/
 
 .close {
   float: right;
@@ -10467,6 +10487,7 @@ a.text-dark:focus {
 }
 
 body {
+  background-color: #343a40;
   padding-top: 70px;
 }
 

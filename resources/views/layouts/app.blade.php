@@ -10,9 +10,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/traitement_cropper.css') }}" rel="stylesheet">
     <link href="{{ asset('css/traitement_cropper.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">--}}
+    {{--<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">--}}
     @yield('css')
 </head>
 <body>
@@ -26,13 +26,13 @@
         <ul class="navbar-nav mr-auto">
             @admin
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle{{ currentRoute(route('transitional.index'))}}" href="#"
+                <a class="nav-link dropdown-toggle{{ currentRoute(route('avatar.index'))}}" href="#"
                    id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     @lang('Administration')
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat">
-                    <a class="dropdown-item" href="{{ route('transitional.index') }}">
+                    <a class="dropdown-item" href="{{ route('avatar.index') }}">
                         <i class="fas fa-id-card-alt fa-lg"></i> @lang('Valider les Avatars')
                     </a>
                 </div>
@@ -46,10 +46,27 @@
                 <li class="nav-item{{ currentRoute(route('register')) }}">
                     <a class="nav-link" href="{{ route('register') }}">@lang('Inscription')</a></li>
             @else
-                <li class="nav-item{{ currentRoute(route('profile.show')) }}">
-                    <a class="nav-link" href="{{ route('profile.show') }}">
-                        <img src="./images/avatars_users/{{ Auth::user()->imageUrl }}" style="width: 30px ">
-                        @lang('Bonjour, '){{ Auth::user()->username }}</a>
+            @auth
+                <li class="nav-item">
+                    <a class="nav-justified" style="padding: 0.5rem 1rem">
+                        {{--@include('Avatar.avatar-user')--}}
+                        <img src="{{ $avatarPath }}" style="width: 3vw ">
+                    </a>
+                </li>
+                    <a class="nav-link">@lang('Bonjour, '){{ Auth::user()->username }}</a>
+                <li class="nav-item">
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle{{ currentRoute(route('profile.show',array('id'=>Auth::user()->id))) }}"href="#"
+                       id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat" >
+                        <a class="dropdown-item" href="{{ route('profile.show',array('id'=>Auth::user()->id)) }}">
+                            <i class="fas fa-id-card-alt fa-lg"></i> @lang('Votre profil')
+                        </a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a id="logout" class="nav-link" href="{{ route('logout') }}">@lang('Déconnexion')</a>
@@ -57,12 +74,18 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
+            @endauth
             @endguest
         </ul>
     </div>
 </nav>
 @yield('content')
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('js/traitement_cropper.js')}}" defer></script>
+<script src="{{asset('js/traitement_main.js')}}" defer></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://fengyuanchen.github.io/js/common.js"></script>
 @yield('script')
 <script>
     $(() => {

@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Avatars\AvatarUser;
+use App\Models\Avatar;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 
 
 class UserProfileController extends Controller
 {
-    public function show()
+    public function index()
     {
-        return view('profile', ['user' => Auth::user()] );
+       return $avatars = DB::table('avatars');
+    }
+    public function show(Request $request)    {
+
+            $avatarPath = $request->session()->get('avatarPath');
+            return view('profile.profile',compact('avatarPath'));
+    }
+    public function postForm(){
+
     }
     /**
      * @param Request $request
@@ -20,15 +32,15 @@ class UserProfileController extends Controller
      */
     public function update(Request $request){
         // Logic for user upload of avatars
-        if($request->hasFile('avatars')){
+       /* if($request->hasFile('avatars')){
             $avatar = $request->file('avatars');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300, 300)->save( public_path('/images/avatars_submit' . $filename ) );
             $user = Auth::user();
             $user->avatar = $filename;
             $user->save();
-        }
-        return view('profile', ['user' => Auth::class] );
+        }*/
+        return view('profile.profile', ['user' => Auth::class] );
     }
     /**
      * @param $role

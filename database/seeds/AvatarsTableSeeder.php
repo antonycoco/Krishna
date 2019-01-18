@@ -12,27 +12,30 @@ class AvatarsTableSeeder extends Seeder
     public function run()
     {
         Avatar::create([
-            'imageUrl'=>'default.png',
+            'imageUrl'=>'image1.jpg',
+            'imageValider'=>true,
             'user_id'=>1,
         ]);
         Avatar::create([
-            'imageUrl'=>'default.png',
+            'imageUrl'=>'image2.jpg',
             'user_id'=>2,
         ]);
         Avatar::create([
-            'imageUrl'=>'default.png',
+            'imageUrl'=>'image3.jpg',
             'user_id'=>3,
         ]);
         Avatar::create([
-            'imageUrl'=>'default.png',
+            'imageUrl'=>'image4.jpg',
+            'imageValider'=>true,
             'user_id'=>4,
         ]);
         Avatar::create([
-            'imageUrl'=>'default.png',
+            'imageUrl'=>'image5.jpg',
             'user_id'=>5,
         ]);
         Avatar::create([
-            'imageUrl'=>'default.png',
+            'imageUrl'=>'image6.png',
+            'imageValider'=>true,
             'user_id'=>6,
         ]);
 
