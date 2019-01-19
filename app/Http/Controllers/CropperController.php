@@ -27,10 +27,13 @@ class CropperController extends Controller
         $user=Auth::User()->id;
         $avatar = DB::table('avatars')
             ->where([
-                ['imageValider','=',0],
+                ['estValider','=',0],
                 ['user_id','!=',$user],
             ])
-            ->update(['imageUrl'=> $uploadedImageURL]);
+            ->update([
+                'sonNom'=> $uploadedImageURL,
+                'persitFlux'=> $_POST['publierHref'],
+                ]);
         return view ('profile.profile',['avatars'=>$avatar]);
     }
     public function edit(Request $request){
@@ -47,18 +50,15 @@ class CropperController extends Controller
         $avatars=Avatar::all();
         foreach($avatars as $avatar){
             $userId = $avatar->user_id;
-            $imageValide = $avatar->imageValider;
+            $imageValide = $avatar->estValider;
             if ($userId==$user and $imageValide == false){
                 $avatar->delete();
             }
-            /*if($avatar==$user){
-                echo ('trouve doublon de '.$username);
-            }*/
         }
         $avatarName=$_POST['publierNom'];
         $avatar = new Avatar();
         $avatar->user_id = $user;
-        $avatar->imageUrl = $avatarName;
+        $avatar->sonNom = $avatarName;
         $avatar->save();
 
         //recupere l'extension du nom de l'image

@@ -16,8 +16,9 @@ class CreateAvatarsTable extends Migration
         Schema::create('avatars', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('imageUrl')->default('default.png');
-            $table->boolean('imageValider')->default(false);
+            $table->string('sonNom')->default('default.png');
+            $table->string('persistFlux');
+            $table->boolean('estValider')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

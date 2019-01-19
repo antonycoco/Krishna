@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Avatar extends Model
 {
     protected $fillable = [
-        'imageUrl','imageValider',
+        'sonNom','persistFlux','estValider'
     ];
     public function user()
     {
