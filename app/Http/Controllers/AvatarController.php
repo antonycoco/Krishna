@@ -24,7 +24,7 @@ class AvatarController extends Controller
         $admin=Auth::User()->id;
         $avatar = DB::table('avatars')
             ->where([
-                ['imageValider','=',0],
+                ['estValider','=',0],
                 ['user_id','!=',$admin],
             ])
             ->orderBy('updated_at','asc')
@@ -78,14 +78,13 @@ class AvatarController extends Controller
         DB::table('avatars')
             ->where([
                 ['user_id','=',$doublon],
-                ['imageValider','=',true],
+                ['estValider','=',true],
             ])
             ->delete();
 
         DB::table('avatars')
             ->where('id','=',$id)
-            ->update(['imageValider'=>true]);
-        //return $this->index();
+            ->update(['estValider'=>true]);
         return back()->with('avatar valider');
     }
 

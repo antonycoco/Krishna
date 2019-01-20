@@ -64,6 +64,11 @@ return [
             'root' => storage_path('app/public') .('/imagesSubmits'),
             'visibility' => 'public',
         ],
+        'imagesUsers' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public') .('/imagesUsers'),
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
