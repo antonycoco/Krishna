@@ -66,7 +66,7 @@ return [
         ],
         'imagesUsers' => [
             'driver' => 'local',
-            'root' => storage_path('app/public') .('/imagesUsers'),
+            'root' => storage_path('app/avatar_repo') .('/imagesUsers'),
             'visibility' => 'public',
         ],
         's3' => [

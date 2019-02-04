@@ -44,8 +44,6 @@ class CropperController extends Controller
     {
         //sauvegarde du nom de l'avatar en base en attentede validation
         $avatarPath = $request->session()->get('avatarPath');
-
-        $dossier = 'storage/imagesSubmits/';
         $user=Auth::User()->id;
         $avatars=Avatar::all();
         foreach($avatars as $avatar){
@@ -55,23 +53,30 @@ class CropperController extends Controller
                 $avatar->delete();
             }
         }
+        $date = date_timestamp_get(date_create());
+        $nameDirect=(Auth::user()->username).($date);
+        Storage::disk('local')->makeDirectory('avatarRepository/'.$nameDirect);
+        $dossier = 'avatarRepository/'.$nameDirect;
         $avatarName=$_POST['publierNom'];
+        $avatarBase64=$_POST['publierHref'];
         $avatar = new Avatar();
         $avatar->user_id = $user;
         $avatar->sonNom = $avatarName;
+        $avatar->persistFlux = $avatarBase64;
         $avatar->save();
 
         //recupere l'extension du nom de l'image
         $avatarHeader = 'image/'.substr(strrchr($avatarName, '.'),1);
         //sauvegarde de l'image cropped apres encodage(balise canvas)/decodage Base64
         \header($avatarHeader);
-        $avatarBase64=$_POST['publierHref'];
         //on retire le MINE-type et le mot clé present pour ne recuperer que la data de l'encodage
         $avatarBase64= explode(',',$avatarBase64)[1];
 
         $avatarData=base64_decode($avatarBase64);
         $avatarImage=imagecreatefromstring($avatarData);
-        Image::make($avatarImage)->save($dossier.$avatarName);
+        //Image::make($avatarImage)->save($dossier.$avatarName);
+        Image::make($avatarImage)->save(storage_path('app/').$dossier.'/'.$avatarName);
+
 //        $avatarHref=$_POST['publierHref'];
 ////        $avatarBase64=time().'.'.explode('/',explode(':',substr($avatarHref,0,strpos($avatarHref,';')))[1])[1];
 ////        Image::make($avatarHref)->save('storage/imagesSubmits/'.$avatarBase64);

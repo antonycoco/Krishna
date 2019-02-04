@@ -72,20 +72,20 @@ class AvatarController extends Controller
      */
     public function edit($id)
     {
-        $doublon=DB::table('avatars')
-            ->where('id','=',$id)
-            ->value('user_id');
-        DB::table('avatars')
-            ->where([
-                ['user_id','=',$doublon],
-                ['estValider','=',true],
-            ])
-            ->delete();
+//        $doublon=DB::table('avatars')
+//            ->where('id','=',$id)
+//            ->value('user_id');
+//        DB::table('avatars')
+//            ->where([
+//                ['user_id','=',$doublon],
+//                ['estValider','=',true],
+//            ])
+//            ->delete();
 
         DB::table('avatars')
             ->where('id','=',$id)
             ->update(['estValider'=>true]);
-        return back()->with('avatar valider');
+        return back();
     }
 
     /**
