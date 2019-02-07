@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Avatar extends Model
 {
     protected $fillable = [
-        'sonNom','persistFlux','estValider'
+        'sonNom','cheminLocal','persistFlux','estValider'
     ];
     public function user()
     {

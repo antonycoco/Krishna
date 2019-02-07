@@ -1,35 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Helpers\Avatars\AvatarUser;
+use App\Http\Requests\AvatarsRequest;
 use App\Models\Avatar;
 use App\Models\User;
-use App\Repositories\TransitionalRepository;
+use App\Repositories\AvatarRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\This;
 
 class AvatarController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $avatarPath = $request->session()->get('avatarPath');
-
-        $admin=Auth::User()->id;
-        $avatar = DB::table('avatars')
-            ->where([
-                ['estValider','=',0],
-                ['user_id','!=',$admin],
-            ])
-            ->orderBy('updated_at','asc')
-            ->paginate(5);
-        return view('validations.index',['avatars'=>$avatar],compact('avatarPath'));
+        $users=User::all();
+        return view('profile',compact('users'));
     }
 
     /**
@@ -37,9 +28,9 @@ class AvatarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-
+        return view('frontView.cropper.cropper');
     }
 
     /**
@@ -48,9 +39,12 @@ class AvatarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AvatarRepositoryInterface $avatarRepository)
     {
-
+        $oldAvatarSubmit=Avatar::where('user_id',Auth::id())->value('id');
+        AvatarUser::set_oldAvatarUser($oldAvatarSubmit,false);
+        $avatarRepository->save();
+        return redirect('profile');
     }
 
     /**
@@ -59,9 +53,9 @@ class AvatarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Avatar $avatar)
     {
-
+        //
     }
 
     /**
@@ -72,20 +66,8 @@ class AvatarController extends Controller
      */
     public function edit($id)
     {
-        $doublon=DB::table('avatars')
-            ->where('id','=',$id)
-            ->value('user_id');
-        DB::table('avatars')
-            ->where([
-                ['user_id','=',$doublon],
-                ['estValider','=',true],
-            ])
-            ->delete();
-
-        DB::table('avatars')
-            ->where('id','=',$id)
-            ->update(['estValider'=>true]);
-        return back()->with('avatar valider');
+        $avatar=Avatar::find($id);
+        return view('frontView.cropper.cropper',compact('avatar'));
     }
 
     /**
@@ -95,9 +77,9 @@ class AvatarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Avatar $avatar)
     {
-
+        //
     }
 
     /**
@@ -106,9 +88,8 @@ class AvatarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Avatar $avatar)
     {
-        DB::table('avatars')->where('id','=',$id)->delete();
-        return response()->json();
+        //
     }
 }

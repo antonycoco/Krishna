@@ -9,9 +9,11 @@
 namespace App\Helpers\Avatars;
 
 
+use App\Models\Avatar;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AvatarUser
 {
@@ -23,6 +25,7 @@ class AvatarUser
         return (isset ($avatarUser->imageUrl)?$avatarUser->imageUrl:'default.jpg');
     }
     public static function set_avatarUserName($id){
+        //$user = Auth::user()->find($id);
         $user = User::find($id);
         if (Auth::id()==$id) {
             if (isset($user->avatar->estValider)) {
@@ -40,22 +43,18 @@ class AvatarUser
             }
         }return $path;
     }
-    public static function get_avatarStream($data){
-        $date = date_timestamp_get(date_create());
-        $nameAvatar=(Auth::user()->username).($date);
-        $data1=explode(',',$data)[0];
-        $data2=explode(',',$data)[1];
-        $data3=explode('/',explode(';',$data)[0])[1];
-        $data4=$data1.','.$data2;
-        Storage::disk('imagesSubmits')->makeDirectory($nameAvatar);
+    public static function set_oldAvatarUser($id,$condition){
+        $oldAvatarUser=DB::table('avatars')->where('id','=',$id)->value('user_id');
+        // avec cet id on supprime le storage local
+        AvatarUser::set_deleteAvatarRepository($oldAvatarUser,$condition);
+        //suppressio de l'ancien avatars
+        DB::table('avatars')->where([['user_id','=',$oldAvatarUser],['estValider','=',$condition],])->delete();
     }
-    public static function set_avatarStream(){
-        file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data2"));//code fonctionnel
-        Storage::disk('imagesUsers')->makeDirectory($nameAvatar);
-        copy("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar","storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar");
-        //$nameAvatar=(Storage::disk('imagesUsers')->prepend("$nameAvatar/Avatar.$nameAvatar",$data1));
-        file_put_contents("storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data4"));//code fonctionnel
-        rename("storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar","storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar.$data3");
-        error_reporting(null);
+    public static function set_deleteAvatarRepository($userId,$condition){
+        $avatar=DB::table('avatars')->where([['user_id','=',$userId],['estValider','=',$condition],])
+            ->value('cheminLocal');
+        $avatar=explode('/',$avatar)[1];
+        Storage::disk('local')->deleteDirectory('avatarRepository/'.$avatar);
     }
+
 }

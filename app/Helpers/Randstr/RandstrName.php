@@ -12,6 +12,7 @@ namespace App\Helpers\Randstr;
 use Faker\Provider\DateTime;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Whoops\Util\SystemFacade;
@@ -22,60 +23,63 @@ class RandstrName
      * @param $name
      * @return bool|string
      */
-    public static function get_incrementalHash($data){
-       /* $seed = str_split("0123456789.!@#$%^&*().ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz");
-        shuffle($seed); // probably optional since array_is randomized; this may be redundant
-        $rand = '';
-        foreach (array_rand($seed, 8) as $k){
-            echo (str_shuffle($rand .= $seed[$k]));
-        }*/
-        //$base = strlen($charset);
-        //$md5name= md5($name);
-        //$image="storage/app/public/imagesDefauts/default.jpg";
-        echo ('affichage du href : '.$data);
-        echo('<br/>');
-//        $file=fopen($data,"rb");
-//        $content=fread($file,filesize($data));
-//        fclose($file);
-//        echo $content;
+    public static function get_incrementalHash()
+    {
+        //
+//        /* $seed = str_split("0123456789.!@#$%^&*().ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz");
+//         shuffle($seed); // probably optional since array_is randomized; this may be redundant
+//         $rand = '';
+//         foreach (array_rand($seed, 8) as $k){
+//             echo (str_shuffle($rand .= $seed[$k]));
+//         }*/
+//        //$base = strlen($charset);
+//        //$md5name= md5($name);
+//        //$image="storage/app/public/imagesDefaults/default.jpg";
+//        echo ('affichage du href : '.$data);
 //        echo('<br/>');
-        $file2 =file_get_contents($data);
-        $content2=($file2);
-        error_reporting(null);
-        //echo $content2;
-        $date = date_timestamp_get(date_create());
-        $nameAvatar=(Auth::user()->username).($date);
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        echo $nameAvatar;
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        $data1=explode(',',$data)[0];
-        $data2=explode(',',$data)[1];
-        $data3=explode('/',explode(';',$data)[0])[1];
-        echo $data1;
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        echo $data2;
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        echo $data3;
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        $data4=$data1.','.$data2;
-        echo $data4;
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-//        $data=base64_decode($data);
-//        $data=imagecreatefromstring($data);
-
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        Storage::disk('imagesSubmits')->makeDirectory($nameAvatar);
-        echo('<br/>-----------------------------------------------------------------------------------------------------');
-        file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data2"));//code fonctionnel
-        Storage::disk('imagesUsers')->makeDirectory($nameAvatar);
-        copy("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar","storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar");
-        //$nameAvatar=(Storage::disk('imagesUsers')->prepend("$nameAvatar/Avatar.$nameAvatar",$data1));
-        file_put_contents("storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data4"));//code fonctionnel
-        rename("storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar","storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar.$data3");
-        //$image=Image::make($image)->encode('jpg');
-
-        //$image=Image::make($image)->save("storage/imagesSubmits/");
-       // $image=imagecreatefromstring($image);
+////        $file=fopen($data,"rb");
+////        $content=fread($file,filesize($data));
+////        fclose($file);
+////        echo $content;
+////        echo('<br/>');
+//        $file2 =file_get_contents($data);
+//        $content2=($file2);
+//        error_reporting(null);
+//        //echo $content2;
+//        $date = date_timestamp_get(date_create());
+//        $nameAvatar=(Auth::user()->username).($date);
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        echo $nameAvatar;
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        $data1=explode(',',$data)[0];
+//        $data2=explode(',',$data)[1];
+//        $data3=explode('/',explode(';',$data)[0])[1];
+//        echo $data1;
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        echo $data2;
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        echo $data3;
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        $data4=$data1.','.$data2;
+//        echo $data4;
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+////        $data=base64_decode($data);
+////        $data=imagecreatefromstring($data);
+//
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        Storage::disk('imagesSubmits')->makeDirectory($nameAvatar);
+//        echo('<br/>-----------------------------------------------------------------------------------------------------');
+//        file_put_contents("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data2"));//code fonctionnel
+//        Storage::disk('imagesUsers')->makeDirectory($nameAvatar);
+//        copy("storage/imagesSubmits/$nameAvatar/Avatar.$nameAvatar","storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar");
+//        //$nameAvatar=(Storage::disk('imagesUsers')->prepend("$nameAvatar/Avatar.$nameAvatar",$data1));
+//        file_put_contents("storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar", file_get_contents("$data4"));//code fonctionnel
+//        rename("storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar","storage/imagesUsers/$nameAvatar/Avatar.$nameAvatar.$data3");
+//        //$image=Image::make($image)->encode('jpg');
+//        echo('<br/>-return du flux----------------------------------------------------------------------------------------------------');
+//        return $data;
+//        //$image=Image::make($image)->save("storage/imagesSubmits/");
+        // $image=imagecreatefromstring($image);
         //imagejpeg($image);
         //$donne=Storage::disk('imagesSubmits')->get("$nameAvatar/Avatar.$nameAvatar");
         //$image=imagecreatefromstring($donne);
@@ -114,3 +118,4 @@ class RandstrName
 //        //return substr($result, 0,16);
     }
 }
+
