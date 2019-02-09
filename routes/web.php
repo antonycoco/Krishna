@@ -11,20 +11,12 @@
 |
 */
 Auth::routes();
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-Route::get('/','FrontController@home');//->name('home')->middleware('verified');
 
-Route::middleware('admin')->group(function ()
-{
+Route::get('/','FrontController@home');
+
+Route::middleware('admin')->group(function () {
+    Route::resource('validation','ValidateController');
 });
-Route::resource('validation','ValidateController');
-//Route::get('validation','ValidateController@index')->name('validation.index');
-//creation de la route pour la connexion ldapp
-//Route::get('login','LoginController@getForm')->name('login');
-//Route::post('login','LoginController@postForm')->name('login');
-
 
 Route::resource('avatar','AvatarController');
 
@@ -33,4 +25,4 @@ Route::get('avatarsStreamSubmit','ProfileController@avatarsStreamSubmit')->name(
 
 Route::get('profile','ProfileController@show')->name('profile.show');
 
-Route::get('test','ProfileController@test')->name('test');
+Route::get('test','testController@test')->name('test');

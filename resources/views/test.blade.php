@@ -15,11 +15,20 @@
 @show
 
 <div class="container">
-    {{--{{ $user }}<br>--}}
-    {{--{{ $chemin }}<br>--}}
-    {{--{{ $avatarName }}<br>--}}
-    {{--{{ $essai }}<br>--}}
-
+    valeur du test 1 : {{ $test1 }}<br>
+    valeur du test 2 : {{ $test2 }}<br>
+    valeur du test 3 : {{ $test3 }}<br>
+    valeur du test 4 : {{ $test4 }}<br>
+    valeur du test file :
+    <ul>
+        @forelse($files as $file)
+            <li><a href="{{ Storage::disk('local')->url($file) }}">{{ Storage::disk('local')->url($file) }}</a></li>
+        @empty
+            <li><em>No files to display.</em></li>
+        @endforelse
+    </ul>
+    valeur du test 5 : {{ $test5 }}<br>
+    valeur du test 6 : {{ $test6 }}<br>
     {{--@foreach($avatars as $avatar)--}}
         {{--<li>{{ $avatar->cheminLocal }}</li>--}}
     {{--@endforeach--}}

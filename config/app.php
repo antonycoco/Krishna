@@ -175,7 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\AvatarServiceProvider::class,
-        App\Providers\RandstrServiceProvider::class,
     ],
 
     /*
@@ -225,8 +224,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'AvatarDp'=>App\Helpers\Avatars\AvatarUser::class,
-        'RdsName'=>\App\Helpers\Randstr\RandstrName::class,
+        'AvatarDp'=>App\Statiques\Avatars\AvatarUser::class,
     ],
 
 ];

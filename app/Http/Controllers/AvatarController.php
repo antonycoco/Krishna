@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Avatars\AvatarUser;
+use App\Statiques\Avatars\AvatarUser;
 use App\Http\Requests\AvatarsRequest;
 use App\Models\Avatar;
-use App\Models\User;
 use App\Repositories\AvatarRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +18,8 @@ class AvatarController extends Controller
      */
     public function index()
     {
-        $users=User::all();
-        return view('profile',compact('users'));
+//        $avatar=Avatar::all();
+//        return view('profile',compact('avatar'));
     }
 
     /**
@@ -41,8 +40,12 @@ class AvatarController extends Controller
      */
     public function store(AvatarRepositoryInterface $avatarRepository)
     {
-        $oldAvatarSubmit=Avatar::where('user_id',Auth::id())->value('id');
-        AvatarUser::set_oldAvatarUser($oldAvatarSubmit,false);
+        if(isset(Auth::user()->avatar) and Auth::user()->avatar->estValider==false)
+        {
+            $userId=Auth::user()->id;
+            $oldAvatarSubmit=Avatar::where('user_id',$userId)->value('id');
+            AvatarUser::set_newAvatarUser($oldAvatarSubmit,false);
+        }
         $avatarRepository->save();
         return redirect('profile');
     }

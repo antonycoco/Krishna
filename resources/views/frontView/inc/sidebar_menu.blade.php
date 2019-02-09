@@ -6,7 +6,7 @@
             <p class="centered"><a href="{{ route('profile.show') }}">
                     <img src="{{ route('avatarStream')  }}" class="img-circle" width="80"></a></p>
             <h5 class="centered">{{ Auth::user()->user }}</h5>
-            <li class="mt">
+{{--            <li class="mt">
                 <a class="active" href="index.html">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
@@ -108,13 +108,13 @@
                     <li><a href="chat_room.html"> Chat Room</a></li>
                 </ul>
             </li>
-            @endauth
             <li>
                 <a href="google_maps.html">
                     <i class="fa fa-map-marker"></i>
                     <span>Google Maps </span>
                 </a>
-            </li>
+            </li>--}}
+            @endauth
         </ul>
         <!-- sidebar menu end-->
     </div>

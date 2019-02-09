@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Avatars\AvatarUser;
+use App\Statiques\Avatars\AvatarUser;
 use App\Models\Avatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +25,7 @@ class ValidateController extends Controller
                 ['user_id','!=',$admin],
             ])
             ->orderBy('updated_at','asc')
-            ->paginate(5);
+            ->paginate(3);
 //        $avatars=Avatar::paginate(3);
         return view('frontView.validations.index',compact('avatars'));
     }
@@ -71,7 +71,10 @@ class ValidateController extends Controller
     public function edit($id)
     {
         //on recupere l'id de user
-        AvatarUser::set_oldAvatarUser($id,true);
+        if(isset(Auth::user()->avatar->estValider) and Auth::user()->avatar->value(estValider))
+        {
+            AvatarUser::set_oldAvatarUser($id,true);
+        }
         //validation de l'avatar en BdD
         DB::table('avatars')->where('id','=',$id)->update(['estValider'=>true]);
         return back();
@@ -97,7 +100,7 @@ class ValidateController extends Controller
      */
     public function destroy($id)
     {
-        AvatarUser::set_oldAvatarUser($id,false);
+        AvatarUser::set_newAvatarUser($id,false);
         return back();
     }
 }

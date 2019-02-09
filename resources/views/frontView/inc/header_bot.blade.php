@@ -10,7 +10,7 @@
         <!--  notification start -->
         <ul class="nav top-menu">
             <!-- settings start -->
-            <li class="dropdown">
+            {{--<li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                     <i class="fa fa-tasks"></i>
                     <span class="badge bg-theme">4</span>
@@ -186,7 +186,7 @@
                         <a href="index.html#">See all notifications</a>
                     </li>
                 </ul>
-            </li>
+            </li>--}}
             <!-- notification dropdown end -->
         </ul>
         <!--  notification end -->

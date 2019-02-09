@@ -23,6 +23,6 @@ class AvatarServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path().'/Helpers/Avatars/AvatarUser.php';
+        require_once app_path().'/Statiques/Avatars/AvatarUser.php';
     }
 }
