@@ -27,7 +27,7 @@ class AvatarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('frontView.cropper.cropper');
     }

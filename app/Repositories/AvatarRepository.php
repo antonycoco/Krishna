@@ -15,9 +15,8 @@ class AvatarRepository implements AvatarRepositoryInterface
 {
     public function save()
     {
-        $user=Auth::user()->id;//En attente de la fonction login ldapp//$user=User::id();
         $avatar=new Avatar();
-        $avatar->user_id=$user;//on doit entre l'id de l'user connecter
+        $avatar->user_id=Auth::user()->id;//En attente de la fonction login ldapp//$user=User::id();
         $avatarName=request('publierNom');//receperation des donne js de l'editeur de l'image via les balises html
         $avatar->sonNom=$avatarName;
         $dossier=AvatarUser::get_makeDirectoryAvatarUserName(); //creation dynamique d'un chemin unique vers un dossier locale

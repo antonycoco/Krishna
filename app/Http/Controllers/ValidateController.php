@@ -71,7 +71,8 @@ class ValidateController extends Controller
     public function edit($id)
     {
         //on recupere l'id de user
-        if(isset(Auth::user()->avatar->estValider) and Auth::user()->avatar->value(estValider))
+        $avatar=Avatar::all()->where('id',$id);
+        if(isset($avatar->estValider) and $avatar->value(estValider))
         {
             AvatarUser::set_oldAvatarUser($id,true);
         }

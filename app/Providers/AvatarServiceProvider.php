@@ -26,3 +26,4 @@ class AvatarServiceProvider extends ServiceProvider
         require_once app_path().'/Statiques/Avatars/AvatarUser.php';
     }
 }
+

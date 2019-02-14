@@ -33,6 +33,9 @@
             @endforeach
             </tbody>
         </table>
-        {{ $avatars->links() }}
+        <div>
+            {{ $avatars->links() }}
+            {{--{{ $avatars->links ('frontView.pagination.front') }}--}}
+        </div>
     @endcomponent
 @endsection
